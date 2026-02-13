@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💌 Mochi's Valentine?</title>
+  <title>💌 Valentine?</title>
   <style>
     :root { --bg1:#ffe6f1; --bg2:#fff6fb; --ink:#2b2b2b; }
     * { box-sizing: border-box; }
@@ -15,7 +15,7 @@
       overflow:hidden;
     }
     .card{
-      width:min(540px,92vw);
+      width:min(560px,92vw);
       padding:30px 22px;
       border-radius:24px;
       background: rgba(255,255,255,0.88);
@@ -25,7 +25,7 @@
       position:relative;
     }
     h1{ margin: 6px 0 10px; font-size: 30px; }
-    p{ margin: 0 0 18px; font-size: 16px; opacity: 0.9; }
+    p{ margin: 0 0 18px; font-size: 16px; opacity: 0.92; }
     .badge{
       display:inline-block;
       padding:6px 10px;
@@ -35,7 +35,7 @@
       font-size:13px;
       margin-bottom:10px;
     }
-    .buttons{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .buttons{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; align-items:center; }
     button{
       border:0;
       padding:12px 18px;
@@ -45,24 +45,33 @@
       transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
       user-select:none;
       touch-action: manipulation;
+      font-weight: 600;
     }
     #yes{
-      background:#ff4d88;
+      background:#22c55e; /* green */
       color:#fff;
-      box-shadow: 0 10px 20px rgba(255,77,136,0.35);
+      box-shadow: 0 10px 20px rgba(34,197,94,0.30);
       transform: scale(1);
     }
     #no{
-      background:#f2f2f2;
-      color:#444;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      background:#ef4444; /* red */
+      color:#fff;
+      box-shadow: 0 10px 20px rgba(239,68,68,0.25);
       transform: scale(1);
+      position: relative;
     }
-    .hint{ margin-top:14px; font-size:13px; opacity:0.75; }
+
+    /* Hint starts hidden */
+    .hint{
+      margin-top:14px;
+      font-size:13px;
+      opacity:0.78;
+      display:none;
+    }
 
     /* floating hearts background */
     .floating{ position:absolute; inset:-40px; pointer-events:none; opacity:0.35; }
-    .heart{ position:absolute; font-size:18px; animation: float 7s linear infinite; opacity:0.9; }
+    .heart{ position:absolute; animation: float 7s linear infinite; opacity:0.9; }
     @keyframes float{
       from{ transform: translateY(110vh) translateX(0) rotate(0deg); }
       to{ transform: translateY(-20vh) translateX(40px) rotate(360deg); }
@@ -76,9 +85,10 @@
       background: rgba(255, 230, 241, 0.55);
       backdrop-filter: blur(6px);
       padding: 18px;
+      z-index: 9999;
     }
     .modal{
-      width: min(520px, 92vw);
+      width: min(560px, 92vw);
       background: rgba(255,255,255,0.92);
       border-radius: 24px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.14);
@@ -86,11 +96,18 @@
       text-align: center;
     }
     .modal h2{ margin: 6px 0 8px; font-size: 26px; }
-    .modal p{ margin: 0 0 16px; }
-    .modal .small{ font-size: 13px; opacity: 0.75; margin-top: 8px; }
+    .modal p{ margin: 0 0 14px; }
+    .modal .small{ font-size: 13px; opacity: 0.78; margin-top: 10px; }
     .modal button{
-      background:#ff4d88; color:white;
-      box-shadow: 0 10px 20px rgba(255,77,136,0.35);
+      background:#22c55e; color:white;
+      box-shadow: 0 10px 20px rgba(34,197,94,0.30);
+    }
+    .yes-image{
+      width: min(420px, 86vw);
+      border-radius: 18px;
+      margin: 10px auto 6px;
+      display:block;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.12);
     }
   </style>
 </head>
@@ -99,25 +116,30 @@
 
   <div class="card" id="card">
     <div class="badge">💌 from mochi</div>
-    <h1 id="title">Will you be my Valentine?</h1>
-    <p id="subtitle">I promise snacks, laughs, and extra cuteness 🥺✨</p>
+
+    <h1 id="title">Will you be my Valentine again this year?</h1>
+    <p id="subtitle">I promise more soprano delis, 21 degree air-con, and burrito cuddles!</p>
 
     <div class="buttons">
-      <button id="yes">Yes 💖</button>
+      <button id="yes">Yes ❤️</button>
       <button id="no">No</button>
     </div>
 
-    <div class="hint" id="hint">Choose wisely 😇</div>
+    <div class="hint" id="hint"></div>
   </div>
 
   <!-- cute message modal -->
   <div class="overlay" id="overlay">
     <div class="modal">
       <div class="badge">💘 accepted</div>
-      <h2>YAYYY!! 💖</h2>
-      <p id="yesMsg">Okay it’s official — you’re Mochi’s Valentine 😚</p>
-      <button id="close">Aww okay 🥰</button>
-      <div class="small">Screenshot this and send it to Mochi 😌</div>
+      <h2>Yeayyyy! 😍😍</h2>
+      <p>I knew it! It's meeeeee! 🥰❤️❤️</p>
+
+      <!-- Upload an image to your repo and name it "valentine.jpg" (or change src below) -->
+      <img class="yes-image" id="yesImage" src="valentine.jpg" alt="Mochi Valentine Image" />
+
+      <button id="close">Okayyy ❤️</button>
+      <div class="small">now mochi can do the old man screenshot and send to me!</div>
     </div>
   </div>
 
@@ -132,7 +154,7 @@
       s.style.left = Math.random()*100 + 'vw';
       s.style.animationDelay = (-Math.random()*7) + 's';
       s.style.animationDuration = (6 + Math.random()*6) + 's';
-      s.style.fontSize = (14 + Math.random()*16) + 'px';
+      s.style.fontSize = (14 + Math.random()*18) + 'px';
       floating.appendChild(s);
     }
 
@@ -142,25 +164,19 @@
     const overlay = document.getElementById('overlay');
     const closeBtn = document.getElementById('close');
 
-    // Your sequence
-    const noTextSeq = ["No", "You sure", "Pleaseeeeeee", "Last chance"];
-    let noClicks = 0;
-
-    // Button scaling
+    // Bigger contrast requested
     let yesScale = 1;
     let noScale  = 1;
 
     function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
-
     function setScales() {
       yesBtn.style.transform = `scale(${yesScale})`;
       noBtn.style.transform  = `scale(${noScale})`;
     }
 
     function moveNoRandomly() {
-      // teleport the NO button around the page
       noBtn.style.position = 'fixed';
-      const pad = 12;
+      const pad = 10;
       const maxX = window.innerWidth  - noBtn.offsetWidth  - pad;
       const maxY = window.innerHeight - noBtn.offsetHeight - pad;
       const x = clamp(Math.floor(Math.random() * maxX), pad, maxX);
@@ -169,53 +185,72 @@
       noBtn.style.top  = y + 'px';
     }
 
+    // States:
+    // 0: initial "No" + no hint
+    // 1: "you sure?" + hint "choose wisely!"
+    // 2: "Pleaseeeeeee 🥺" + hint "But we need two kitchen mochis!"
+    // 3: "last chance" + hint "okay it's running away now!" + yes at largest + no shrunk + teleport always
+    let state = 0;
+
+    function ensureHintVisible(text) {
+      hint.textContent = text;
+      hint.style.display = 'block';
+    }
+
     function handleNo() {
-      noClicks++;
-
-      // grow YES, shrink NO
-      yesScale = clamp(yesScale + 0.15, 1, 2.2);
-      noScale  = clamp(noScale - 0.12, 0.55, 1);
-      setScales();
-
-      // update NO label in the requested sequence
-      const idx = Math.min(noClicks, noTextSeq.length - 1);
-      noBtn.textContent = noTextSeq[idx];
-
-      // behavior after "Last chance"
-      if (noBtn.textContent === "Last chance") {
-        hint.textContent = "Okay… now it’s gonna run away 😈";
+      // If already at last chance, keep teleporting only
+      if (state >= 3) {
         moveNoRandomly();
-      } else {
-        hint.textContent = "Just say yes lah 🥺";
+        return;
       }
+
+      // Increase contrast every NO click
+      // (bigger jumps than before)
+      yesScale = clamp(yesScale + 0.35, 1, 2.8);
+      noScale  = clamp(noScale - 0.28, 0.35, 1);
+
+      state++;
+
+      if (state === 1) {
+        noBtn.textContent = "you sure?";
+        ensureHintVisible("choose wisely! ");
+      } else if (state === 2) {
+        noBtn.textContent = "Pleaseeeeeee 🥺";
+        ensureHintVisible("But we need two kitchen mochis!");
+      } else if (state === 3) {
+        // Force YES to maximum at this stage
+        yesScale = 2.8;
+        noScale  = 0.35;
+        setScales();
+
+        noBtn.textContent = "last chance";
+        ensureHintVisible("okay it's running away now!");
+        moveNoRandomly();
+        return;
+      }
+
+      setScales();
     }
 
     // NO click (desktop + mobile)
     noBtn.addEventListener('click', handleNo);
     noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); handleNo(); }, {passive:false});
 
-    // If it’s already on Last chance, every click keeps teleporting
-    noBtn.addEventListener('click', () => {
-      if (noBtn.textContent === "Last chance") moveNoRandomly();
-    });
-
-    // YES click -> show cute message modal
+    // YES click -> show message modal at any stage
     yesBtn.addEventListener('click', () => {
       overlay.style.display = 'grid';
-      hint.textContent = "Hehe 😌";
-      // Optional: hide buttons so it feels “done”
-      // yesBtn.style.display = 'none';
-      // noBtn.style.display = 'none';
     });
 
     closeBtn.addEventListener('click', () => {
       overlay.style.display = 'none';
     });
 
-    // Click outside modal to close (optional)
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) overlay.style.display = 'none';
     });
+
+    // Keep scales correct on load
+    setScales();
   </script>
 </body>
 </html>
